@@ -18,6 +18,11 @@ func execCommand(command []string) {
 		return
 	}
 
+	if command[0] == "type" {
+		typeCommand(command)
+		return
+	}
+
 	function, ok := commands[command[0]]
 	// If the key exists
 	if ok {
@@ -41,6 +46,23 @@ func exitCommand(command []string) {
 func echoCommand(command []string) {
 	message := strings.Join(command[1:], " ")
 	fmt.Println(message)
+}
+
+func typeCommand(command []string) {
+
+	if len(command) < 2 {
+		fmt.Println("type: missing argument")
+		return
+	}
+
+	commandName := command[1]
+	_, ok := commands[commandName]
+	if ok {
+		fmt.Println(commandName + " is a shell builtin")
+	} else {
+		fmt.Println(commandName + " not found")
+	}
+
 }
 
 func main() {
