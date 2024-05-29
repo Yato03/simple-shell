@@ -74,7 +74,7 @@ func (c *TypeCommand) execute(args []string) {
 		dirs := strings.Split(path, ":")
 		for _, dir := range dirs {
 			if listFiles(dir, commandName) {
-				fmt.Println(commandName + " is " + dir)
+				fmt.Println(commandName + " is " + dir + "/" + commandName)
 				return
 			}
 		}
