@@ -8,27 +8,24 @@ import (
 	"strings"
 )
 
-var commands = map[string]func([]string){
-	"exit": exitCommand,
-	"echo": echoCommand,
-}
+var commands = []string{"exit", "echo", "type"}
 
 func execCommand(command []string) {
 	if len(command) == 0 {
 		return
 	}
 
-	if command[0] == "type" {
-		typeCommand(command)
-		return
-	}
+	commandName := command[0]
 
-	function, ok := commands[command[0]]
-	// If the key exists
-	if ok {
-		function(command)
-	} else {
-		fmt.Println(command[0] + ": command not found")
+	switch commandName {
+	case "exit":
+		exitCommand(command)
+	case "echo":
+		echoCommand(command)
+	case "type":
+		typeCommand(command)
+	default:
+		fmt.Println("Command not found")
 	}
 }
 
@@ -56,8 +53,8 @@ func typeCommand(command []string) {
 	}
 
 	commandName := command[1]
-	_, ok := commands[commandName]
-	if ok {
+
+	if strings.Contains(strings.Join(commands, ","), commandName) {
 		fmt.Println(commandName + " is a shell builtin")
 	} else {
 		fmt.Println(commandName + " not found")
