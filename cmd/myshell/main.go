@@ -12,6 +12,8 @@ func execCommand(command []string) {
 	switch command[0] {
 	case "exit":
 		exitCommand(command)
+	case "echo":
+		echoCommand(command)
 	default:
 		fmt.Println(command[0] + ": command not found")
 	}
@@ -26,6 +28,11 @@ func exitCommand(command []string) {
 		os.Exit(0)
 	}
 	os.Exit(exitCode)
+}
+
+func echoCommand(command []string) {
+	message := strings.Join(command[1:], " ")
+	fmt.Println(message)
 }
 
 func main() {
