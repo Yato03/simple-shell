@@ -65,16 +65,10 @@ func (c *TypeCommand) execute(args []string) {
 	}
 
 	//search in PATH
-	path, ok := os.LookupEnv("PATH")
-
+	dir, ok := searchCommandInPath(commandName)
 	if ok {
-		dirs := strings.Split(path, ":")
-		for _, dir := range dirs {
-			if listFiles(dir, commandName) {
-				fmt.Println(commandName + " is " + dir + "/" + commandName)
-				return
-			}
-		}
+		fmt.Println(commandName + " is " + dir)
+		return
 	}
 
 	fmt.Println(commandName + " not found")
