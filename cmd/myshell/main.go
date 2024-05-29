@@ -25,7 +25,7 @@ func execCommand(command []string) {
 	case "type":
 		typeCommand(command)
 	default:
-		fmt.Println("Command not found")
+		fmt.Println(commandName + ": command not found")
 	}
 }
 
