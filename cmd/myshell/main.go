@@ -58,7 +58,6 @@ func (c *TypeCommand) execute(args []string) {
 
 	commandName := args[0]
 
-	//_, ok := os.LookupEnv(commandName)
 	//search builint commands
 	for _, value := range commands {
 		if value == commandName {
@@ -114,26 +113,6 @@ func listFiles(dir string, name string) bool {
 	return result
 }
 
-/*
-func execCommand(command []string) {
-	if len(command) == 0 {
-		return
-	}
-
-	commandName := command[0]
-
-	switch commandName {
-	case "exit":
-		exitCommand(command)
-	case "echo":
-		echoCommand(command)
-	case "type":
-		typeCommand(command)
-	default:
-		fmt.Println(commandName + ": command not found")
-	}
-}*/
-
 func execCommand(command []string) {
 	if len(command) == 0 {
 		return
@@ -152,41 +131,6 @@ func execCommand(command []string) {
 	fmt.Println(commandName + ": command not found")
 
 }
-
-/*
-func exitCommand(command []string) {
-	if len(command) < 2 {
-		os.Exit(0)
-	}
-	exitCode, err := strconv.Atoi(command[1])
-	if err != nil {
-		os.Exit(0)
-	}
-	os.Exit(exitCode)
-}
-
-
-func echoCommand(command []string) {
-	message := strings.Join(command[1:], " ")
-	fmt.Println(message)
-}
-
-func typeCommand(command []string) {
-
-	if len(command) < 2 {
-		fmt.Println("type: missing argument")
-		return
-	}
-
-	commandName := command[1]
-
-	if strings.Contains(strings.Join(commands, ","), commandName) {
-		fmt.Println(commandName + " is a shell builtin")
-	} else {
-		fmt.Println(commandName + " not found")
-	}
-
-}*/
 
 func main() {
 
