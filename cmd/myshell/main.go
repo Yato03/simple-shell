@@ -8,13 +8,21 @@ import (
 	"strings"
 )
 
+var commands = map[string]func([]string){
+	"exit": exitCommand,
+	"echo": echoCommand,
+}
+
 func execCommand(command []string) {
-	switch command[0] {
-	case "exit":
-		exitCommand(command)
-	case "echo":
-		echoCommand(command)
-	default:
+	if len(command) == 0 {
+		return
+	}
+
+	function, ok := commands[command[0]]
+	// If the key exists
+	if ok {
+		function(command)
+	} else {
 		fmt.Println(command[0] + ": command not found")
 	}
 }
