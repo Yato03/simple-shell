@@ -84,14 +84,6 @@ type PwdCommand struct {
 	name string
 }
 
-/*
-func (c *PwdCommand) execute(args []string) {
-	path, ok := os.LookupEnv("PWD")
-	if ok {
-		fmt.Println(path)
-	}
-}*/
-
 func (c *PwdCommand) execute(args []string) {
 	path, err := os.Getwd()
 	if err != nil {

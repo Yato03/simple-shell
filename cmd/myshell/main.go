@@ -41,8 +41,6 @@ func execCommand(command []string) {
 }
 
 func main() {
-	fmt.Println("Llego hasta aqui")
-
 	for {
 		fmt.Fprint(os.Stdout, "$ ")
 
