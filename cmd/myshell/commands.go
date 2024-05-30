@@ -134,7 +134,7 @@ func (c *ChangeDirectoryCommand) execute(args []string) {
 
 	err := os.Chdir(path)
 	if err != nil {
-		fmt.Println("cd: " + path + ": No such file or directory")
+		fmt.Println(path + ": No such file or directory")
 	}
 
 }
