@@ -79,8 +79,24 @@ func (c *TypeCommand) getName() string {
 	return c.name
 }
 
+type PwdCommand struct {
+	name string
+}
+
+func (c *PwdCommand) execute(args []string) {
+	path, ok := os.LookupEnv("PWD")
+	if ok {
+		fmt.Println(path)
+	}
+}
+
+func (c *PwdCommand) getName() string {
+	return c.name
+}
+
 var commands = []Command{
 	&ExitCommand{name: "exit"},
 	&EchoCommand{name: "echo"},
 	&TypeCommand{name: "type"},
+	&PwdCommand{name: "pwd"},
 }
