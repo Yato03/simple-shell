@@ -2,7 +2,9 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"os"
+	"os/exec"
 	"path/filepath"
 	"strings"
 )
@@ -38,4 +40,12 @@ func searchCommandInPath(commandName string) (string, bool) {
 		}
 	}
 	return "", false
+}
+
+func execFile(command string, args []string) {
+	cmd := exec.Command(command, args...)
+	cmd.Stdout = os.Stdout
+	if err := cmd.Run(); err != nil {
+		log.Fatal(err)
+	}
 }

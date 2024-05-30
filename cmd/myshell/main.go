@@ -3,9 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
-	"log"
 	"os"
-	"os/exec"
 	"strings"
 )
 
@@ -25,14 +23,16 @@ func execCommand(command []string) {
 		}
 	}
 
+	//search in its directory
+	if _, err := os.Stat(commandName); err == nil {
+		execFile(commandName, args)
+		return
+	}
+
 	//search in PATH
 	path, ok := searchCommandInPath(commandName)
 	if ok {
-		cmd := exec.Command(path, args...)
-		cmd.Stdout = os.Stdout
-		if err := cmd.Run(); err != nil {
-			log.Fatal(err)
-		}
+		execFile(path, args)
 		return
 	}
 
