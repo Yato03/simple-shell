@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"os"
 	"os/exec"
@@ -11,7 +10,7 @@ import (
 
 func listFiles(dir string, name string) bool {
 	result := false
-	err := filepath.Walk(dir, func(path string, info os.FileInfo, err error) error {
+	filepath.Walk(dir, func(path string, info os.FileInfo, err error) error {
 		if err != nil {
 			return err
 		}
@@ -22,9 +21,6 @@ func listFiles(dir string, name string) bool {
 		return nil
 	})
 
-	if err != nil {
-		fmt.Printf("Error listing files: %v\n", err)
-	}
 	return result
 }
 
