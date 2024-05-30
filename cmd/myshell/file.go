@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"os"
 	"os/exec"
@@ -47,7 +48,7 @@ func execFile(command string, args []string) {
 }
 
 func parsePath(path string) string {
-
+	fmt.Println("Llego hasta aqui")
 	// Absolute path
 	if strings.HasPrefix(path, "/") {
 		return path
