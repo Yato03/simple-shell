@@ -47,11 +47,27 @@ func execFile(command string, args []string) {
 }
 
 func parsePath(path string) string {
+
+	// Absolute path
 	if strings.HasPrefix(path, "/") {
 		return path
 	}
 
-	//It is a relative path
+	// Home directory
+	if strings.HasPrefix(path, "~") {
+		homeDir, err := os.UserHomeDir()
+		if err != nil {
+			log.Println(err)
+		}
+
+		if len(path) == 1 {
+			return homeDir
+		}
+
+		return filepath.Join(homeDir, path[2:])
+	}
+
+	// Relative path
 	currentPath, err := os.Getwd()
 	if err != nil {
 		log.Println(err)
