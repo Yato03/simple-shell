@@ -45,3 +45,17 @@ func execFile(command string, args []string) {
 		log.Fatal(err)
 	}
 }
+
+func parsePath(path string) string {
+	if strings.HasPrefix(path, "/") {
+		return path
+	}
+
+	//It is a relative path
+	currentPath, err := os.Getwd()
+	if err != nil {
+		log.Println(err)
+	}
+
+	return filepath.Join(currentPath, path)
+}

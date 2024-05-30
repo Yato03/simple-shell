@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"path/filepath"
 	"strconv"
 	"strings"
 )
@@ -118,19 +117,7 @@ func (c *ChangeDirectoryCommand) execute(args []string) {
 
 	pathToChange := args[0]
 
-	var path string
-
-	if strings.HasPrefix(pathToChange, "/") {
-		path = pathToChange
-	} else {
-		currentPath, err := os.Getwd()
-		if err != nil {
-			fmt.Println("cd: cannot access the current path")
-			return
-		}
-
-		path = filepath.Join(currentPath, pathToChange)
-	}
+	path := parsePath(pathToChange)
 
 	err := os.Chdir(path)
 	if err != nil {
