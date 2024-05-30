@@ -116,15 +116,27 @@ func (c *ChangeDirectoryCommand) execute(args []string) {
 		return
 	}
 
-	path, err := os.Getwd()
-	if err != nil {
-		fmt.Println("cd: cannot access the current path")
-		return
+	pathToChange := args[0]
+
+	var path string
+
+	if strings.HasPrefix(pathToChange, "/") {
+		path = pathToChange
+	} else {
+		currentPath, err := os.Getwd()
+		if err != nil {
+			fmt.Println("cd: cannot access the current path")
+			return
+		}
+
+		path = filepath.Join(currentPath, pathToChange)
 	}
-	err = os.Chdir(filepath.Join(path, args[0]))
+
+	err := os.Chdir(path)
 	if err != nil {
 		fmt.Println("cd: " + path + ": No such file or directory")
 	}
+
 }
 
 func (c *ChangeDirectoryCommand) getName() string {
